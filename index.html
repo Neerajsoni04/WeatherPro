@@ -2,20 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeatherPro - Professional Weather Forecast</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>WeatherPro - Mobile Weather App</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta name="description" content="Professional weather forecast with accurate predictions, hourly updates, and 7-day outlook">
-    <meta name="keywords" content="weather, forecast, temperature, humidity, wind, professional weather app">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 <body>
     <div class="app-container">
-        <!-- Navigation Header -->
-        <nav class="navbar">
+        <!-- Mobile Navigation Header -->
+        <nav class="mobile-navbar">
             <div class="nav-content">
                 <div class="brand">
                     <div class="brand-icon">
@@ -23,26 +24,22 @@
                     </div>
                     <div class="brand-text">
                         <h1>WeatherPro</h1>
-                        <span>Professional Forecast</span>
                     </div>
                 </div>
                 
                 <div class="nav-actions">
-                    <button id="locationBtn" class="action-btn" title="Use Current Location">
+                    <button id="locationBtn" class="action-btn" title="Current Location">
                         <i class="fas fa-location-crosshairs"></i>
                     </button>
                     <button id="themeToggle" class="action-btn" title="Toggle Theme">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <button id="settingsBtn" class="action-btn" title="Settings">
-                        <i class="fas fa-cog"></i>
-                    </button>
                 </div>
             </div>
         </nav>
 
-        <!-- Search Section -->
-        <section class="search-section">
+        <!-- Mobile Search Section -->
+        <section class="mobile-search-section">
             <div class="search-container">
                 <div class="search-wrapper">
                     <div class="search-input-container">
@@ -50,27 +47,21 @@
                         <input 
                             type="text" 
                             id="cityInput" 
-                            placeholder="Search for cities, countries, or coordinates..." 
+                            placeholder="Search cities..." 
                             autocomplete="off"
-                            spellcheck="false"
                         >
                         <button id="clearSearch" class="clear-btn hidden">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
-                    <button id="searchBtn" class="search-submit-btn">
-                        <span>Search</span>
-                        <i class="fas fa-arrow-right"></i>
+                    <button id="searchBtn" class="search-btn">
+                        <i class="fas fa-search"></i>
                     </button>
                 </div>
                 
                 <div id="searchSuggestions" class="search-suggestions hidden">
-                    <div class="suggestions-header">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Suggested Locations</span>
-                    </div>
                     <div id="suggestionsList" class="suggestions-list">
-                        <!-- Dynamic suggestions will be inserted here -->
+                        <!-- Dynamic suggestions -->
                     </div>
                 </div>
             </div>
@@ -80,22 +71,11 @@
         <main class="main-content">
             <!-- Loading State -->
             <div id="loadingState" class="loading-state hidden">
-                <div class="loading-animation">
-                    <div class="weather-loader">
-                        <div class="cloud">
-                            <div class="cloud-part cloud-part-1"></div>
-                            <div class="cloud-part cloud-part-2"></div>
-                            <div class="cloud-part cloud-part-3"></div>
-                        </div>
-                        <div class="rain">
-                            <div class="rain-drop"></div>
-                            <div class="rain-drop"></div>
-                            <div class="rain-drop"></div>
-                        </div>
-                    </div>
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
                 </div>
-                <h3>Fetching Weather Data</h3>
-                <p>Please wait while we get the latest weather information...</p>
+                <h3>Getting Weather...</h3>
+                <p>Please wait...</p>
             </div>
 
             <!-- Error State -->
@@ -103,264 +83,147 @@
                 <div class="error-icon">
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
-                <h3>Unable to Load Weather Data</h3>
-                <p id="errorMessage">Something went wrong. Please check your connection and try again.</p>
+                <h3>Can't Load Weather</h3>
+                <p id="errorMessage">Please try again</p>
                 <button id="retryBtn" class="retry-btn">
                     <i class="fas fa-redo"></i>
-                    <span>Try Again</span>
+                    Try Again
                 </button>
             </div>
 
             <!-- Weather Content -->
             <div id="weatherContent" class="weather-content hidden">
-                <!-- Current Weather Hero -->
-                <section class="weather-hero">
-                    <div class="hero-background">
-                        <div class="weather-particles"></div>
-                    </div>
-                    
-                    <div class="hero-content">
+                <!-- Current Weather Card -->
+                <section class="current-weather-card">
+                    <div class="location-header">
                         <div class="location-info">
-                            <div class="location-primary">
-                                <h2 id="currentCity">New York</h2>
-                                <span id="currentCountry">United States</span>
-                            </div>
-                            <div class="location-secondary">
-                                <span id="currentDate">Monday, January 1, 2024</span>
-                                <span id="lastUpdated">Updated 5 minutes ago</span>
-                            </div>
+                            <h2 id="currentCity">New York</h2>
+                            <span id="currentCountry">United States</span>
                         </div>
+                        <div class="update-info">
+                            <span id="currentDate">Today</span>
+                        </div>
+                    </div>
 
-                        <div class="temperature-display">
-                            <div class="temp-main">
+                    <div class="weather-main">
+                        <div class="temperature-section">
+                            <div class="temp-display">
                                 <span id="currentTemp">22°</span>
-                                <div class="temp-controls">
-                                    <button id="celsiusBtn" class="temp-unit active">°C</button>
-                                    <button id="fahrenheitBtn" class="temp-unit">°F</button>
+                                <div class="temp-units">
+                                    <button id="celsiusBtn" class="temp-unit active">C</button>
+                                    <button id="fahrenheitBtn" class="temp-unit">F</button>
                                 </div>
                             </div>
                             <div class="temp-details">
                                 <div class="feels-like">
-                                    <span>Feels like</span>
-                                    <strong id="feelsLike">25°</strong>
+                                    Feels like <strong id="feelsLike">25°</strong>
                                 </div>
                                 <div class="temp-range">
-                                    <span id="tempHigh">28°</span>
-                                    <span class="separator">/</span>
-                                    <span id="tempLow">18°</span>
+                                    <span id="tempHigh">28°</span> / <span id="tempLow">18°</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="weather-status">
-                            <div class="weather-icon-large">
+                        <div class="weather-visual">
+                            <div class="weather-icon">
                                 <i id="currentWeatherIcon" class="fas fa-sun"></i>
                             </div>
-                            <div class="weather-description">
+                            <div class="weather-desc">
                                 <h3 id="currentCondition">Clear Sky</h3>
-                                <p id="conditionDescription">Perfect weather for outdoor activities</p>
+                                <p id="conditionDescription">Perfect day</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Weather Metrics Grid -->
-                <section class="weather-metrics">
-                    <div class="metrics-grid">
-                        <div class="metric-card">
-                            <div class="metric-header">
+                <!-- Weather Details Grid -->
+                <section class="weather-details">
+                    <div class="details-grid">
+                        <div class="detail-card">
+                            <div class="detail-icon">
                                 <i class="fas fa-eye"></i>
-                                <span>Visibility</span>
                             </div>
-                            <div class="metric-value">
-                                <span id="visibility">10 km</span>
+                            <div class="detail-info">
+                                <span class="detail-label">Visibility</span>
+                                <span id="visibility" class="detail-value">10 km</span>
                             </div>
-                            <div class="metric-status good">Excellent</div>
                         </div>
 
-                        <div class="metric-card">
-                            <div class="metric-header">
+                        <div class="detail-card">
+                            <div class="detail-icon">
                                 <i class="fas fa-tint"></i>
-                                <span>Humidity</span>
                             </div>
-                            <div class="metric-value">
-                                <span id="humidity">65%</span>
-                            </div>
-                            <div class="metric-progress">
-                                <div class="progress-bar">
-                                    <div id="humidityProgress" class="progress-fill" style="width: 65%"></div>
-                                </div>
+                            <div class="detail-info">
+                                <span class="detail-label">Humidity</span>
+                                <span id="humidity" class="detail-value">65%</span>
                             </div>
                         </div>
 
-                        <div class="metric-card">
-                            <div class="metric-header">
+                        <div class="detail-card">
+                            <div class="detail-icon">
                                 <i class="fas fa-wind"></i>
-                                <span>Wind Speed</span>
                             </div>
-                            <div class="metric-value">
-                                <span id="windSpeed">15 km/h</span>
-                            </div>
-                            <div class="metric-extra">
-                                <span id="windDirection">NE</span>
-                                <div class="wind-compass">
-                                    <i id="windArrow" class="fas fa-location-arrow" style="transform: rotate(45deg)"></i>
-                                </div>
+                            <div class="detail-info">
+                                <span class="detail-label">Wind</span>
+                                <span id="windSpeed" class="detail-value">15 km/h</span>
                             </div>
                         </div>
 
-                        <div class="metric-card">
-                            <div class="metric-header">
+                        <div class="detail-card">
+                            <div class="detail-icon">
                                 <i class="fas fa-compress-arrows-alt"></i>
-                                <span>Pressure</span>
                             </div>
-                            <div class="metric-value">
-                                <span id="pressure">1013 hPa</span>
-                            </div>
-                            <div class="metric-trend">
-                                <i class="fas fa-arrow-up trend-up"></i>
-                                <span>Rising</span>
+                            <div class="detail-info">
+                                <span class="detail-label">Pressure</span>
+                                <span id="pressure" class="detail-value">1013 hPa</span>
                             </div>
                         </div>
 
-                        <div class="metric-card">
-                            <div class="metric-header">
+                        <div class="detail-card">
+                            <div class="detail-icon">
                                 <i class="fas fa-sun"></i>
-                                <span>UV Index</span>
                             </div>
-                            <div class="metric-value">
-                                <span id="uvIndex">5</span>
-                            </div>
-                            <div class="uv-scale">
-                                <div class="uv-indicator" id="uvIndicator">Moderate</div>
+                            <div class="detail-info">
+                                <span class="detail-label">UV Index</span>
+                                <span id="uvIndex" class="detail-value">5</span>
                             </div>
                         </div>
 
-                        <div class="metric-card">
-                            <div class="metric-header">
+                        <div class="detail-card">
+                            <div class="detail-icon">
                                 <i class="fas fa-cloud-rain"></i>
-                                <span>Precipitation</span>
                             </div>
-                            <div class="metric-value">
-                                <span id="precipitation">0 mm</span>
-                            </div>
-                            <div class="metric-extra">
-                                <span id="precipitationChance">10% chance</span>
+                            <div class="detail-info">
+                                <span class="detail-label">Rain</span>
+                                <span id="precipitation" class="detail-value">0%</span>
                             </div>
                         </div>
                     </div>
                 </section>
 
                 <!-- Hourly Forecast -->
-                <section class="hourly-forecast-section">
+                <section class="hourly-section">
                     <div class="section-header">
-                        <h3>
-                            <i class="fas fa-clock"></i>
-                            24-Hour Forecast
-                        </h3>
-                        <div class="section-controls">
-                            <button class="control-btn" id="hourlyPrev">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button class="control-btn" id="hourlyNext">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
+                        <h3>24-Hour Forecast</h3>
                     </div>
                     <div class="hourly-container">
                         <div id="hourlyForecast" class="hourly-scroll">
-                            <!-- Hourly items will be populated by JavaScript -->
+                            <!-- Hourly items populated by JS -->
                         </div>
                     </div>
                 </section>
 
                 <!-- 7-Day Forecast -->
-                <section class="weekly-forecast-section">
+                <section class="weekly-section">
                     <div class="section-header">
-                        <h3>
-                            <i class="fas fa-calendar-week"></i>
-                            7-Day Forecast
-                        </h3>
-                        <div class="forecast-toggle">
-                            <button id="detailedToggle" class="toggle-btn">
-                                <span>Detailed View</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                        </div>
+                        <h3>7-Day Forecast</h3>
                     </div>
                     <div id="weeklyForecast" class="weekly-container">
-                        <!-- Weekly forecast items will be populated by JavaScript -->
-                    </div>
-                </section>
-
-                <!-- Weather Insights -->
-                <section class="weather-insights">
-                    <div class="section-header">
-                        <h3>
-                            <i class="fas fa-lightbulb"></i>
-                            Weather Insights
-                        </h3>
-                    </div>
-                    <div class="insights-grid">
-                        <div class="insight-card">
-                            <div class="insight-icon">
-                                <i class="fas fa-umbrella"></i>
-                            </div>
-                            <div class="insight-content">
-                                <h4>Rain Forecast</h4>
-                                <p id="rainInsight">No rain expected in the next 24 hours. Perfect for outdoor activities!</p>
-                            </div>
-                        </div>
-                        <div class="insight-card">
-                            <div class="insight-icon">
-                                <i class="fas fa-thermometer-half"></i>
-                            </div>
-                            <div class="insight-content">
-                                <h4>Temperature Trend</h4>
-                                <p id="tempInsight">Temperatures will remain stable throughout the week with minor fluctuations.</p>
-                            </div>
-                        </div>
-                        <div class="insight-card">
-                            <div class="insight-icon">
-                                <i class="fas fa-running"></i>
-                            </div>
-                            <div class="insight-content">
-                                <h4>Activity Recommendation</h4>
-                                <p id="activityInsight">Great conditions for jogging, cycling, and outdoor sports.</p>
-                            </div>
-                        </div>
+                        <!-- Weekly items populated by JS -->
                     </div>
                 </section>
             </div>
         </main>
-
-        <!-- Footer -->
-        <footer class="app-footer">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>WeatherPro</h4>
-                    <p>Professional weather forecasting with accurate, real-time data.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Data Sources</h4>
-                    <p>Powered by OpenWeatherMap API</p>
-                    <p>Updated every 10 minutes</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>support@weatherpro.com</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 WeatherPro. All rights reserved.</p>
-                <p>Last updated: <span id="footerLastUpdated">Just now</span></p>
-            </div>
-        </footer>
     </div>
 
     <script src="script.js"></script>
