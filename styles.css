@@ -1864,59 +1864,139 @@ body {
 
 /* Fix responsive behavior */
 @media (max-width: 768px) {
+  /* Hero section mobile - Fix overflow */
+  .weather-hero {
+    padding: 20px 16px;
+    margin: 0 auto 24px;
+    width: calc(100% - 32px);
+    max-width: none;
+  }
+
   .hero-content {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 32px;
+    gap: 24px;
     min-height: auto;
+    width: 100%;
+  }
+
+  /* Temperature display mobile - Fix sizing */
+  .temperature-display {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .temp-main {
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .temp-main span {
+    font-size: 56px;
+  }
+
+  .temp-controls {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .temp-details {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Weather metrics mobile - Fix card width */
+  .weather-metrics {
+    padding: 20px 16px;
+    margin: 0 auto 24px;
+    width: calc(100% - 32px);
+    max-width: none;
   }
 
   .metrics-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
   }
 
-  .weekly-item {
-    grid-template-columns: 1fr !important;
-    text-align: center;
-    gap: 20px;
-  }
-
-  .insights-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  .hourly-item {
-    width: 90px;
-    padding: 20px 16px;
+  .metric-card {
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 
 @media (max-width: 480px) {
+  /* Extra mobile fixes */
+  .weather-hero {
+    padding: 16px 12px;
+    width: calc(100% - 24px);
+    margin: 0 auto 20px;
+  }
+
+  .temp-main span {
+    font-size: 48px;
+  }
+
+  .temp-unit {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .temp-unit.active {
+    font-size: 15px;
+  }
+
+  .weather-metrics {
+    padding: 16px 12px;
+    width: calc(100% - 24px);
+  }
+
+  .metric-card {
+    padding: 16px;
+  }
+
+  /* Fix all other sections */
+  .hourly-forecast-section,
+  .weekly-forecast-section,
+  .weather-insights {
+    padding: 16px 12px;
+    width: calc(100% - 24px);
+    margin: 0 auto 20px;
+  }
+}
+
+/* Main content mobile container */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 0 16px;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .weather-content {
+    width: 100%;
+    max-width: 100%;
+    gap: 20px;
+  }
+
+  /* Ensure all sections fit within viewport */
   .weather-hero,
   .weather-metrics,
   .hourly-forecast-section,
   .weekly-forecast-section,
   .weather-insights {
-    padding: 24px;
-    margin-bottom: 24px;
-  }
-
-  .hero-content {
-    gap: 24px;
-  }
-
-  .metrics-grid,
-  .insights-grid {
-    gap: 16px;
-  }
-
-  .hourly-scroll {
-    gap: 12px;
-  }
-
-  .hourly-item {
-    width: 80px;
-    padding: 16px 12px;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
   }
 }
 
